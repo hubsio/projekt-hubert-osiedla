@@ -1,9 +1,40 @@
-//package com.siotor;
-//
-//import java.util.Date;
-//
-//public class DeveloperApp {
-//
+package com.siotor;
+
+import java.util.Date;
+
+public class DeveloperApp {
+    public static void main(String[] args) {
+        Dimensions apartmentDimensions = new Dimensions(10, 10, 3);
+        Apartment apartment = new Apartment(apartmentDimensions);
+
+        try {
+            Dimensions item1Dimensions = new Dimensions(2, 2, 2);
+            apartment.addItem(item1Dimensions); // Dodawanie przedmiotu
+
+            Dimensions item2Dimensions = new Dimensions(5, 5, 5);
+            apartment.addItem(item2Dimensions); // Dodawanie przedmiotu
+
+            Dimensions item3Dimensions = new Dimensions(10, 10, 3);
+            apartment.addItem(item3Dimensions); // To jest za duże i rzuci wyjątek
+        } catch (TooManyThingsException e) {
+            System.out.println(e.getMessage());
+        }
+
+        Dimensions parkingSpaceDimensions = new Dimensions(5, 2.5, 2);
+        ParkingSpace parkingSpace = new ParkingSpace(parkingSpaceDimensions);
+
+        try {
+            Dimensions carDimensions = new Dimensions(4.5, 2, 1.5);
+            parkingSpace.addItem(carDimensions); // Dodawanie pojazdu
+
+            Dimensions boatDimensions = new Dimensions(5.5, 2, 2);
+            parkingSpace.addItem(boatDimensions); // To jest za duże i rzuci wyjątek
+        } catch (TooManyThingsException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
 //    public static void main(String[] args) {
 //        // Tworzenie przykładowej osoby
 //        Person person = new Person("Alice", "Johnson", "123456789", "789 Maple St", new Date());

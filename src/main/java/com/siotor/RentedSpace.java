@@ -9,12 +9,14 @@ public class RentedSpace {
     private Dimensions dimensions;
     private Date startDate;
     private Date endDate;
+    private List<Dimensions> storedItems;
 
 
 
     public RentedSpace(int id, Dimensions dimensions) {
         this.id = id;
         this.dimensions = dimensions;
+        this.storedItems = new ArrayList<>();
     }
     public boolean isOverdue() {
         Date currentDate = new Date();
@@ -46,5 +48,21 @@ public class RentedSpace {
 
     public int getId() {
         return id;
+    }
+    //////////// NEW
+    public void addItem(Dimensions itemDimensions) throws TooManyThingsException {
+        double totalVolumeOfStoredItems = storedItems.stream()
+                .mapToDouble(Dimensions::calculateVolume)
+                .sum();
+
+        if (totalVolumeOfStoredItems + itemDimensions.calculateVolume() > dimensions.calculateVolume()) {
+            throw new TooManyThingsException("Przedmiot jest za duży, aby go dodać!");
+        }
+
+        storedItems.add(itemDimensions);
+
+        if (itemDimensions.calculateVolume() <= dimensions.calculateVolume() - totalVolumeOfStoredItems) {
+            System.out.println("Przedmiot pasuje do pomieszczenia!");
+        }
     }
 }

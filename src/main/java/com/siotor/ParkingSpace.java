@@ -6,9 +6,10 @@ import java.util.List;
 public class ParkingSpace extends RentedSpace {
     private List<Object> storedItems;
     private Dimensions dimensions;
+    private static int nextId = 1;
 
-    public ParkingSpace(int id, Dimensions dimensions) {
-        super(id, dimensions);
+    public ParkingSpace(Dimensions dimensions) {
+        super(nextId++, dimensions);
         storedItems = new ArrayList<>();
     }
 
