@@ -18,4 +18,15 @@ public class HousingEstate {
     public List<Block> getBlocks() {
         return blocks;
     }
+    public int getTotalApartments() {
+        return blocks.stream()
+                .mapToInt(block -> block.getApartments().size())
+                .sum();
+    }
+
+    public int getTotalParkingSpaces() {
+        return blocks.stream()
+                .mapToInt(block -> block.getParkingSpaces().size())
+                .sum();
+    }
 }

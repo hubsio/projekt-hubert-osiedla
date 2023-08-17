@@ -1,22 +1,31 @@
 package com.siotor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class RentedSpace {
     private int id;
-    private double length;
-    private double width;
+    private Dimensions dimensions;
     private Date startDate;
     private Date endDate;
 
-    public RentedSpace(int id, double length, double width) {
+
+
+    public RentedSpace(int id, Dimensions dimensions) {
         this.id = id;
-        this.length = length;
-        this.width = width;
+        this.dimensions = dimensions;
+    }
+    public boolean isOverdue() {
+        Date currentDate = new Date();
+        return endDate != null && currentDate.after(endDate);
     }
 
     public double calculateArea() {
-        return length * width;
+        return dimensions.calculateArea();
+    }
+    public double calculateVolume() {
+        return dimensions.calculateVolume();
     }
 
     public Date getStartDate() {

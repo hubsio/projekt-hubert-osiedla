@@ -9,8 +9,9 @@ public class Apartment extends RentedSpace {
     private List<Person> occupants;
     private static int nextId = 1;
 
-    public Apartment(double length, double width) {
-        super(nextId++, length, width);
+    public Apartment(Dimensions dimensions) {
+        super(nextId++, dimensions);
+        occupants = new ArrayList<>();
     }
 
     public void addOccupant(Person person) {

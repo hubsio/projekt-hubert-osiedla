@@ -5,11 +5,13 @@ import java.util.List;
 
 public class ParkingSpace extends RentedSpace {
     private List<Object> storedItems;
-    private static int nextId = 1;
+    private Dimensions dimensions;
 
-    public ParkingSpace(double length, double width) {
-        super(nextId++, length, width);
+    public ParkingSpace(int id, Dimensions dimensions) {
+        super(id, dimensions);
+        storedItems = new ArrayList<>();
     }
+
 
     public void addItem(Object item) {
         storedItems.add(item);
@@ -23,8 +25,6 @@ public class ParkingSpace extends RentedSpace {
         return storedItems;
     }
 
-    public static int getNextId() {
-        return nextId;
-    }
 }
+
 

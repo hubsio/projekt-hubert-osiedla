@@ -1,19 +1,24 @@
 package com.siotor;
 
 public class Vehicle {
-    private String type;
-    private String licensePlate;
+    private String name;
+    private Dimensions dimensions;
 
-    public Vehicle(String type, String licensePlate) {
-        this.type = type;
-        this.licensePlate = licensePlate;
+    public Vehicle(String name, Dimensions dimensions) {
+        this.name = name;
+        this.dimensions = dimensions;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
-
-    public String getLicensePlate() {
-        return licensePlate;
+    public double calculateArea() {
+        return dimensions.calculateArea();
+    }
+    public double calculateVolume() {
+        return dimensions.calculateVolume();
     }
 }
+
+
+

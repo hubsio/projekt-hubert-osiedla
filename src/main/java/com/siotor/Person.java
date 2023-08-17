@@ -13,6 +13,7 @@ public class Person {
     private String address;
     private Date birthDate;
     private List<RentedSpace> rentedSpaces;
+    private File overdueNotice;
 
     public Person(String firstName, String lastName, String pesel, String address, Date birthDate) {
         this.firstName = firstName;
@@ -22,6 +23,39 @@ public class Person {
         this.birthDate = birthDate;
         this.rentedSpaces = new ArrayList<>();
     }
+    public boolean hasProblematicOverdue() {
+        long overdueCount = rentedSpaces.stream()
+                .filter(RentedSpace::isOverdue)
+                .count();
+
+        return overdueCount >= 3;
+    }
+
+    public void checkAndGenerateOverdueNotice() throws ProblematicTenantException {
+        if (hasProblematicOverdue()) {
+            throw new ProblematicTenantException("Osoba " + getFirstName() + " " + getLastName() +
+                    " posiadała już najem pomieszczeń: " + getRentedSpacesList());
+        }
+    }
+
+    private String getRentedSpacesList() {
+        return rentedSpaces.stream()
+                .map(RentedSpace::getId)
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
+    }
+
+
+    public void printOverdueNotice() {
+        if (overdueNotice != null) {
+            System.out.println("Pismo za spóźnione wypowiedzenie: " + firstName + " " + lastName);
+            System.out.println("Wypowiedzenie zapisane jako: " + overdueNotice.getName());
+        } else {
+            System.out.println("Brak spóźnionego wypowiedzenia: " + firstName + " " + lastName);
+        }
+    }
+
+
 
     public String getFirstName() {
         return firstName;
