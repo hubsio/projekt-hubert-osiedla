@@ -3,26 +3,15 @@ package com.siotor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParkingSpace {
-    private int parkingNumber;
-    private double parkingSize;
+public class ParkingSpace extends RentedSpace {
     private List<Object> storedItems;
+    private static int nextId = 1;
 
-    public ParkingSpace(int parkingNumber, double parkingAreaSize) {
-        this.parkingNumber = parkingNumber;
-        this.parkingSize = parkingAreaSize;
-        this.storedItems = new ArrayList<>();
+    public ParkingSpace(double length, double width) {
+        super(nextId++, length, width);
     }
 
-    public int getParkingNumber() {
-        return parkingNumber;
-    }
-
-    public double getParkingAreaSize() {
-        return parkingSize;
-    }
-
-    public void storeItem(Object item) {
+    public void addItem(Object item) {
         storedItems.add(item);
     }
 
@@ -30,13 +19,12 @@ public class ParkingSpace {
         storedItems.remove(item);
     }
 
-    public void parkVehicle(Vehicle vehicle) {
-        storedItems.add(vehicle);
+    public List<Object> getStoredItems() {
+        return storedItems;
     }
 
-    public void unparkVehicle(Vehicle vehicle) {
-        storedItems.remove(vehicle);
+    public static int getNextId() {
+        return nextId;
     }
-
-
 }
+

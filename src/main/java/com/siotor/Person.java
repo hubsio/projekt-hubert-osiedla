@@ -1,35 +1,69 @@
 package com.siotor;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Person {
     private String firstName;
     private String lastName;
-    private String identifier;
-    private boolean responsibleForRent;
-    private List<Apartment> rentedApartments;
-    private List<ParkingSpace> rentedParkingSpace;
+    private String pesel;
+    private String address;
+    private Date birthDate;
+    private List<RentedSpace> rentedSpaces;
 
-    public Person(String firstName, String lastName, String identifier, boolean responsibleForRent, List<Apartment> rentedApartments, List<ParkingSpace> rentedParkingSpace) {
+    public Person(String firstName, String lastName, String pesel, String address, Date birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.identifier = identifier;
-        this.responsibleForRent = responsibleForRent;
-        this.rentedApartments = new ArrayList<>();
-        this.rentedParkingSpace = new ArrayList<>();
+        this.pesel = pesel;
+        this.address = address;
+        this.birthDate = birthDate;
+        this.rentedSpaces = new ArrayList<>();
     }
-    public boolean canRentMoreProperties() {
-        return (rentedApartments.size() + rentedParkingSpace.size()) < 5;
+
+    public String getFirstName() {
+        return firstName;
     }
-    public void rentApartment(Apartment apartment) {
-        if (canRentMoreProperties()) {
-            rentedApartments.add(apartment);
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPesel() {
+        return pesel;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public List<RentedSpace> getRentedSpaces() {
+        return rentedSpaces;
+    }
+
+    public boolean canRentMoreSpaces() {
+        return rentedSpaces.size() < 5;
+    }
+
+    public boolean rentSpace(RentedSpace rentedSpace) {
+        if (rentedSpaces.size() < 5) {
+            rentedSpaces.add(rentedSpace);
+            return true;
         }
+        return false;
     }
-    public void rentParkingSpace(ParkingSpace parkingSpace) {
-        if (canRentMoreProperties()) {
-            rentedParkingSpace.add(parkingSpace);
-        }
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
+
 }
+
+
+

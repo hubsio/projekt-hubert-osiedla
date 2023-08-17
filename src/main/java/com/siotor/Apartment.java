@@ -1,43 +1,27 @@
 package com.siotor;
 
-import java.util.Optional;
 
-public class Apartment {
-    private int flatNumber;
-    private double flatSize;
-    private Person resident;
-    private ParkingSpace rentedParkingSpace;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Apartment(int flatNumber, double flatAreaSize) {
-        this.flatNumber = flatNumber;
-        this.flatSize = flatAreaSize;
-    }
+public class Apartment extends RentedSpace {
 
-    public int getFlatNumber() {
-        return flatNumber;
+    private List<Person> occupants;
+    private static int nextId = 1;
+
+    public Apartment(double length, double width) {
+        super(nextId++, length, width);
     }
 
-    public double getFlatSize() {
-        return flatSize;
+    public void addOccupant(Person person) {
+        occupants.add(person);
     }
 
-    public Person getResident() {
-        return resident;
+    public void removeOccupant(Person person) {
+        occupants.remove(person);
     }
 
-    public Optional<ParkingSpace> getRentedParkingSpace() {
-        return Optional.ofNullable(rentedParkingSpace);
+    public List<Person> getOccupants() {
+        return occupants;
     }
-    public boolean isOccupied() {
-        return resident != null;
-    }
-    public void checkInResident(Person person) {
-        if (!isOccupied()) {
-            this.resident = resident;
-        }
-    }
-    public void checkOutResident() {
-        this.resident = null;
-    }
-
 }
