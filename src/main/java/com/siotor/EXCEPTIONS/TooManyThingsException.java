@@ -1,4 +1,4 @@
-package com.siotor;
+package com.siotor.EXCEPTIONS;
 
 public class TooManyThingsException extends Exception {
     public TooManyThingsException(String message) {
