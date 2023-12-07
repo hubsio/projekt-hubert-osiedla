@@ -57,6 +57,7 @@ public class Apartment extends Room {
     }
 
     public int getId() {
+        System.out.println("Dubi");
         return id;
     }
 
